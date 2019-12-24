@@ -1,0 +1,42 @@
+﻿@model List<Inventario.Objetos.ObjProducto>
+@{
+    if (Session["codeU"] == null || Session["nameU"] == null)
+    {
+        Response.Redirect("~/MODINI_Login/vMODINI_Login");
+    }
+}
+
+<a href="@Url.Action("agregar", "MODPRODU" )" class="btn  btn-primary" id="agregar">Agregar</a>
+<a href="@Url.Action("vMODINI_Logeado", "MODINI_Logeado")" class="btn  btn-primary" id="regresar">Regresar</a>
+<div class="row">
+    <div class="col-md-12 devolucion-ingreso">
+        <br />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Costo</th>
+                    <th>Venta</th>
+                    <th>Ingreso</th>
+                    <th>Modificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td><a href="/MODPRODU/editar/@producto.idproducto.ToString()">@producto.idproducto.ToString()</a></td>
+                        <td>@producto.descripcion</td>
+                        <td>@producto.precio_costo</td>
+                        <td>@producto.precio_venta</td>
+                        <td>@producto.fecha_ingreso</td>
+                        <td>@producto.fecha_modificacion</td>
+                        <td><a href="/MODPRODU/delete/@producto.idproducto.ToString()"><span class="label label-warning">Eliminar</span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
